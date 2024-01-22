@@ -8,8 +8,9 @@
 </head>
 
 <body>
-    <?php
 
+    <?php
+    
     //session_start();
 
     $ftp_server = $_ENV['FTP_SERVER'];
@@ -17,7 +18,7 @@
     $ftp_pass = $_ENV['FTP_PASS'];
 
     $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to $ftp_server");
-
+    
     if (ftp_login($ftp_conn, $ftp_user, $ftp_pass)) {
         // เริ่มต้นการเชื่อมต่อ FTP
         $file_list_ftp = ftp_nlist($ftp_conn, ".");
@@ -26,6 +27,7 @@
         echo "<h1>File List (FTP)</h1>";
         echo "</header>";
 
+        echo"<div>";
         echo "<ul>";
 
         foreach ($file_list_ftp as $file) {
@@ -48,14 +50,14 @@
         echo "</form>";
         echo "</article>";
 
-
+        
 
         //$sql = "SELECT * FROM file_store";
         //$mysqli_result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
 
-            echo "<h2>Uploaded Files (MySQL)</h2>";
+            echo "<h2>Uploaded Files :(MySQL)</h2>";
             echo "<ul>";
 
             while ($row = $result->fetch_assoc()) {
@@ -76,11 +78,13 @@
     } else {
         echo "Could not connect as $ftp_user";
     }
-
+    echo"</div>";
     // ปิดการเชื่อมต่อ FTP
     ftp_close($ftp_conn);
+    
+    
     ?>
-
+    <img class="img-one" src="img/1-removebg-preview (1) - Copy.png" width="35%" height="">
 </body>
 
 </html>
